@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- MathJax for mathematical notation -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Syntax Highlighting with highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href=../assets/colours.css>
+    <link rel="stylesheet" href="../assets/shared-styles.css">
+    <link rel="stylesheet" href="../assets/nav-bar.css">
+    <link rel="stylesheet" href="../assets/module_card.css">
+    <link rel="stylesheet" href="../assets/learning_outcomes.css">
+    <link rel="stylesheet" href="../assets/learning_lists.css">
+    <link rel="stylesheet" href="../assets/box_styles.css">
+    <link rel="stylesheet" href="../assets/code_styles.css">
+    <link rel="stylesheet" href="../assets/static_output.css">
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scryptIQ - AI0 - PyTorch</title>
+    
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a href="../homepage.html" style="text-decoration: none; display: inline-block;">
+                <img src="../assets/scryptIQ_logo_dark.png" alt="scryptIQ Logo" class="sidebar-logo">
+            </a>
+        </div>
+
+        <h3>Content</h3>
+        <ul>
+            <li><a href="./introduction.html" class="">Introduction</a></li><li><a href="./what-is-ai.html">What is AI?</a></li>
+            <li>
+                <div class="nav-toggle active" data-target="expandable-section-2">
+                    PyTorch
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <ul class="nested-nav expanded" id="expandable-section-2"><li><a href="#introduction">Introduction</a></li><li><a href="#pytorch-installation">PyTorch installation</a></li><li><a href="#recap--creating-a-virtual-environment">Recap: creating a virtual environment</a></li><li><a href="#choosing-between-pip--uv--and-conda">Choosing between pip, UV, and conda</a></li><li><a href="#cpu-only-installation">CPU-only installation</a></li><li><a href="#installing-pytorch--nvidia">Installing PyTorch (NVIDIA)</a></li><li><a href="#installing-pytorch--apple-silicon">Installing PyTorch (Apple Silicon)</a></li><li><a href="#installing-pytorch--windows---linux">Installing PyTorch (Windows & Linux)</a></li><li><a href="#importing-pytorch">Importing PyTorch</a></li><li><a href="#quick-sanity-check--your-first-tensor">Quick sanity check: your first tensor</a></li><li><a href="#common-installation-issues">Common installation issues</a></li><li><a href="#summary">Summary</a></li>
+                </ul>
+            </li><li><a href="./tensors.html">Tensors</a></li><li><a href="./feedback.html">Feedback</a></li>
+        </ul>
+
+        <h3 class="collapsible-header collapsed">
+            Resources
+            <span class="collapse-icon">►</span>
+        </h3>
+        <div class="collapsible-content collapsed">
+            <ul>
+                <li><a href="./glossary.html">Glossary</a></li><li><a href="./downloads.html">Downloads</a></li><li><a href="../HB/introduction.html">Handbook</a></li>
+            </ul>
+        </div>
+
+        <h3>
+            <li><a href="./report-issue.html">Report an Issue</a></li>
+        </h3>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
+
+    <!-- Main Content Area -->
+    <div id="main-content" class="main-content">
+        <!-- Top Navigation Bar -->
+        <div class="top-navbar">
+            <h1 class="page-title">Artificial Intelligence Orientation</h1>
+            <div class="nav-actions">
+                <a href="../homepage.html" class="text-button" title="Materials homepage">
+                    Homepage
+                </a>
+                <a href="https://scryptiq.ai/my-cohorts/" class="text-button scryptiq-button" title="Find out more about us">
+                    scryptIQ
+                </a>
+            </div>
+        </div>
+
+        
+            <div class="module-card" id="introduction">
+                <div class="module-header">
+                    PyTorch <span class="module-tag">AI0</span>
+                </div>
+                <div class="module-body">
+                    <h3>Learning Objectives</h3>
+                    <div class="learning-outcomes">
+                        <div class="outcome-item">
+                    <span class="outcome-number">1</span>
+                    <span class="outcome-text">Explain what PyTorch is and describe its role as a deep learning framework</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">2</span>
+                    <span class="outcome-text">Set up and use a virtual environment for installing and managing PyTorch</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">3</span>
+                    <span class="outcome-text">Define a tensor and distinguish between scalars, vectors, matrices, and higher-dimensional tensors</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">4</span>
+                    <span class="outcome-text">Create tensors in PyTorch and interpret their shape and dimensionality</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">5</span>
+                    <span class="outcome-text">Understand common tensor datatypes and explain how precision affects performance and memory usage</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">6</span>
+                    <span class="outcome-text">Move tensors between devices (CPU and GPU) and understand the role of hardware acceleration in deep learning</span>
+                </div>
+                    </div>
+                    <h3>Introduction</h3>
+                    <p><strong>PyTorch</strong> is an open-source machine learning and deep learning framework that provides tools for building, training and deploying neural networks using Python. It is built around the concept of <strong>tensors</strong> and <strong>automatic differentiation</strong>, allowing complex mathematical models to be expressed in a clear and flexible way. PyTorch <em>supports both CPU and GPU acceleration</em> and is designed to scale from small experiments on a laptop to large models running on specialised hardware.<br><br>PyTorch is particularly popular in research and education because of its intuitive Pythonic design and its emphasis on dynamic computation graphs, which allow models to be defined and modified on the fly. This makes it intuitive to debug, experiment and iterate compared to more rigid frameworks. At the same time, PyTorch is widely used in industry, powering applications in computer vision, natural language processing, speech recognition and even generative AI. Its balance of flexibility, performance and a large supporting ecosystem has made it one of the most widely adopted deep learning frameworks in use today; many of the attributes that have made Python attractive as a mainstream programming language.</p>
+                </div>
+            </div>
+            
+            <div class="module-card" id="pytorch-installation">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>PyTorch installation</h3>
+                        <p>To install PyTorch, the approach varies depending on your operating system, whether your computer has a GPU and the type of GPU. It is essential to visit the PyTorch installation guide website at <a href="https://pytorch.org/get-started/locally/">PyTorch Get Started Locally</a> for specific instructions tailored to your setup.<br><br>Below, I&#x27;ll provide general guidance and examples for installing PyTorch on Windows, Linux and macOS systems that have an NVIDIA GPU, using both <code>pip</code> and <code>conda</code>.</p>
+        <div class="info-box note-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                NOTE
+            </div>
+            <div class="box-content">
+                <p>We have provided <a href="../PF0/course-setup.html">GitHub CodeSpaces</a> for you with a <strong>CPU</strong> version of PyTorch installed already. The following is for local setup only.</p>
+            </div>
+        </div>
+        <h4>Installation prerequisites</h4><p><strong>Before installation</strong>, make sure you check the following:<br><br><strong>1. GPU compatibility (optional but recommended)</strong><br>If your system includes a GPU and you plan to use hardware acceleration, you must firstly check that it is supported.<br><ul class="nested-list"><li><em>NVIDIA</em> GPUs must be CUDA-capable and compatible with the version of CUDA supported by your chosen PyTorch build. If a GPU is <strong>CUDA-capable</strong> means that a graphics card can run software built using CUDA (Compute Unified Device Architecture), NVIDIA’s framework for general-purpose computation on GPUs. In practical terms, a CUDA-capable GPU can perform large numbers of mathematical operations in parallel, which is exactly what libraries like PyTorch use to accelerate machine learning workloads.</li><br><li><em>Apple</em> macintosh computers with Apple silicon (such as the M1, M2 and M3 processors) use <strong>MPS (Metal Performance Shaders)</strong> for GPU acceleration instead of CUDA. This allows PyTorch to use the high-performance GPU built into your Mac for machine learning tasks.</li><br><li><em>AMD</em> GPUs may be supported through alternative backends, but support is more limited and platform-dependent. If you are unsure, PyTorch will still run correctly on the CPU, albeit more slowly for large models.</li></ul></p><p><strong>2. Python installation</strong><br><br>Ensure that Python is installed and accessible from the command line. <strong>PyTorch supports Python version 3.7 and up</strong>. You can check your installed version by running <code>python --version</code> or <code>python3 --version</code> in the <strong>terminal</strong>. If multiple Python versions are installed, make sure you use a compatible one.</p><p><strong>3. Environment setup</strong><br><br>It is strongly recommended to install PyTorch <em>inside a <strong>virtual environment</strong></em> rather than into your system-wide Python installation. Virtual environments help isolate project dependencies, reduce version conflicts between packages, and make your work easier to reproduce. Common options include <code>venv</code>, Conda environments, or other environment managers you may already be using. Please refer to our <strong>Python Orientation</strong> reference materials for more information on how to set up a virtual environment.</p><p>Taking a few minutes to verify these points will help avoid common installation issues and make working with PyTorch more reliable from the outset.</p>
+        <div class="info-box fact-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                FACT
+            </div>
+            <div class="box-content">
+                <p>PyTorch tensors and models live on a <em>device</em>, typically either the <strong>CPU</strong> or a <strong>GPU</strong>. While code can often be written in a device-agnostic way, it is common to explicitly move data and models between devices for performance reasons. In machine learning workloads that involve large matrix and tensor operations, GPUs can provide immense advantage, often being <strong>orders of magnitude faster</strong> than CPUs on a standard desktop or laptop; this often makes them far better suited to training and running modern AI models.<br><br>Managing your devices correctly is essential for avoiding common runtime errors and for taking advantage of hardware acceleration.</p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="recap--creating-a-virtual-environment">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Recap: creating a virtual environment</h3>
+                        <p>Before we dive into installing PyTorch, let&#x27;s recap on what a virtual environment is.</p>
+        <div class="info-box key-terms-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                KEY TERMS
+            </div>
+            <div class="box-content">
+                <p>A <strong>virtual environment</strong> is an isolated Python environment that allows you to install packages for a specific project without affecting your system-wide Python installation or other projects. Using virtual environments helps to compartmentalise your work, and avoid version conflicts, making projects easier to reproduce, and is considered a best practice for working with Python libraries such as PyTorch.</p>
+            </div>
+        </div>
+        <h4>Why use a virtual environment?</h4><p>Virtual environments allow you to:<br><ul class="nested-list"><li>Keep project dependencies separate</li><br><li>Avoid conflicts between package versions</li><br><li>Ensure consistent behaviour across machines</li><br><li>Safely experiment without breaking other projects</li></ul>Each virtual environment has its own Python interpreter and its own set of installed packages.</p>
+        <div class="info-box remember-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                REMEMBER
+            </div>
+            <div class="box-content">
+                <p>Python includes a built-in tool called <code>venv</code> for creating virtual environments.<br><br>In your terminal, run the following line from the root of your working directory:<br><br><pre class="markdown-code-block"><code>python -m venv .venv</code></pre></p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="choosing-between-pip--uv--and-conda">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Choosing between pip, UV, and conda</h3>
+                        <p>Both tools are valid for installing PyTorch. The best choice depends on how you manage your Python environments.<br><ul class="nested-list"><li>Use <strong><code>pip</code></strong> if you are already working with <code>venv</code> and standard Python packaging workflows</li><br><li>Use <strong><code>conda</code></strong> if you are managing environments and scientific dependencies through Anaconda or Miniconda</li></ul>Whichever option you choose, keep it consistent within one project to reduce dependency conflicts.</p>
+        <div class="info-box warning-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                WARNING
+            </div>
+            <div class="box-content">
+                <p>Do not mix installs in the same environment unless you have a clear reason and understand the dependency implications.</p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="cpu-only-installation">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>CPU-only installation</h3>
+                        <p>If you do not have a compatible GPU, or if you are just getting started, you can install and run the CPU only version of PyTorch. This is often enough for early learning and smaller experiments.</p><p>In your terminal, use one of the following:<br><br><strong>Using <code>pip</code>:</strong><br><pre class="markdown-code-block"><code>pip3 install torch torchvision torchaudio</code></pre><br><br><strong>Using <code>conda</code>:</strong><br><pre class="markdown-code-block"><code>conda install pytorch torchvision torchaudio cpuonly -c pytorch</code></pre></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="installing-pytorch--nvidia">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Installing PyTorch (NVIDIA)</h3>
+                        <p>As referenced above, systems with an NVIDIA GPU will make use of the <a href="https://developer.nvidia.com/cuda/toolkit"><strong>CUDA toolkit</strong></a> to leverage GPU acceleration. Here are installation examples for <em>pip</em> and <em>conda</em> on different operating systems.<br><br>In your terminal (using shell), type the following:<br><br><strong>Using <code>pip</code></strong><br><pre class="markdown-code-block"><code>pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121</code></pre><br><br><strong>Using <code>conda</code></strong><br><br><pre class="markdown-code-block"><code>conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia</code></pre></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="installing-pytorch--apple-silicon">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Installing PyTorch (Apple Silicon)</h3>
+                        <p>For Apple Macintosh computers with Apple Silicon (M1, M2, M3 chips) use <strong>MPS (Metal Performance Shaders)</strong> for GPU acceleration instead of CUDA. The first step to take before installing, is to determine which version of Mac OS your computer is running. You can do this by clicking the Apple logo in the top-left corner of your screen and selecting &quot;About This Mac&quot;.</p>
+        <div class="info-box note-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                NOTE
+            </div>
+            <div class="box-content">
+                <p>To use PyTorch on Apple silicon, you will need to be running Mac OS 12.3 (Monterey), or later. Previous versions do not include the MPS support essential to running PyTorch.</p>
+            </div>
+        </div>
+        <p>It is highly recommended that you use a <strong>native arm64</strong> version of Python, rather than one installed via Rosetta 2. You can install these <em>via</em> Miniforge or the official installers available at <a href="https://www.python.org">Python.org</a>.</p><h4>Using pip</h4><p>Enter the following into your terminal app (bash):<br><br><pre class="markdown-code-block"><code>pip3 install torch torchvision torchaudio</code></pre></p><h4>Using conda</h4><p>Enter the following into your terminal app (bash):<br><br><pre class="markdown-code-block"><code>conda install pytorch::pytorch torchvision torchaudio -c pytorch</code></pre></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="installing-pytorch--windows---linux">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Installing PyTorch (Windows & Linux)</h3>
+                        <p>For computers running <strong>Windows or Linux</strong>, GPU acceleration is typically provided via <strong>CUDA</strong> for systems with NVIDIA GPUs, or <em>via</em> AMD’s equivalent GPU compute platforms on supported hardware.<br><br>To use GPU acceleration with PyTorch, your system must have a compatible GPU and the appropriate drivers installed. Before installing PyTorch, the first step is to determine whether your machine has an NVIDIA or AMD GPU and to check your operating system version.<br><ul class="nested-list"><li>On <strong>Windows</strong>, you can do this <em>via</em> <em>Settings → System → About</em> or through <em>Device Manager</em>.</li><br><li>On <strong>Linux</strong>, you can check your system details using commands such as <code>lspci</code> (to list hardware) and <code>uname -a</code> (to view OS information). If no compatible GPU is available, PyTorch can still be installed and used with CPU support.</li></ul></p><h4>CUDA installation commands</h4><h4>Using pip</h4><p>Into the terminal (shell), enter the following line:<br><br><pre class="markdown-code-block"><code>pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121</code></pre></p><h4>Using conda</h4><p>Into the terminal (shell), enter the following command:<br><br><pre class="markdown-code-block"><code>conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia</code></pre></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="importing-pytorch">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Importing PyTorch</h3>
+                        <p>Once installed, as with any Python package, PyTorch needs to be imported. We can also simultaneously implement import verification, as follows:</p>
+        <div class="info-box note-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                NOTE
+            </div>
+            <div class="box-content">
+                <p>The first check confirms that PyTorch is installed and importable in your active environment. If this fails, double-check that your notebook kernel is using the same environment where you installed PyTorch.</p>
+            </div>
+        </div>
+        
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-1">import torch
+
+print(torch.__version__)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">2.5.1+cpu
+</pre></div>
+        </div>
+        <p>For our setup we have chosen the <strong>2.5.1</strong> version, as this is the most up to date, CPU only version. As of writing the latest stable version was <strong>2.9.1</strong>.</p><h4>Finding out what is avaiable</h4><p>The following code is used in the lessons to check whether there is a GPU or MPS available, if not it falls back to the CPU.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-2">import torch
+import torch.nn as nn
+
+# Check if GPU is available
+if torch.cuda.is_available():
+    # if there are multiple GPUs, choose the first one
+    device = torch.device(&quot;cuda&quot;) # Defines the device you want to have data moved to
+    print(f&#x27;There are {torch.cuda.device_count()} GPU(s) available.&#x27;)
+    print(f&quot;Using: {device} (Cuda)&quot;)
+
+# Check for MPS (Apple Silicon GPU) availability
+elif torch.backends.mps.is_available():
+    device = torch.device(&quot;mps&quot;)
+    print(f&quot;Using: {device} (Apple Silicon)&quot;)
+
+else:
+    print(&quot;No GPU detected! Falling back to CPU&quot;)
+    # If the GPU is not available, use the CPU
+    device = torch.device(&quot;cpu&quot;)
+
+# Create a simple model
+model = nn.Linear(10, 2)
+
+# Move the model onto the chosen device
+model.to(device)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">No GPU detected! Falling back to CPU
+</pre><pre class="output-result">Linear(in_features=10, out_features=2, bias=True)</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="quick-sanity-check--your-first-tensor">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Quick sanity check: your first tensor</h3>
+                        <p>After installation and import checks, it is useful to run one small tensor example to confirm that core PyTorch operations are working as expected.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-3">import torch
+
+x = torch.tensor([[1.0, 2.0], [3.0, 4.0]])
+print(&quot;Tensor:\n&quot;, x)
+print(&quot;Shape:&quot;, x.shape)
+print(&quot;Dtype:&quot;, x.dtype)
+print(&quot;Device:&quot;, x.device)
+print(&quot;x + 1:\n&quot;, x + 1)
+</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">Tensor:
+ tensor([[1., 2.],
+        [3., 4.]])
+Shape: torch.Size([2, 2])
+Dtype: torch.float32
+Device: cpu
+x + 1:
+ tensor([[2., 3.],
+        [4., 5.]])
+</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="common-installation-issues">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Common installation issues</h3>
+                        
+        <div class="info-box important-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                IMPORTANT
+            </div>
+            <div class="box-content">
+                <p>If you run into setup problems, check the following:<br><ul class="nested-list"><li>PyTorch was installed into the same environment used by your notebook kernel</li><br><li>Your Python version is supported by the installed PyTorch build</li><br><li>GPU drivers and backend support (CUDA or MPS) are installed and compatible</li><br><li>You restarted the kernel after installation so imports reflect the updated environment</li></ul></p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="summary">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Summary</h3>
+                        <p>Now that PyTorch is installed and verified, the next notebook focuses on tensors in depth, including shape, dimensionality, datatypes and device placement in practice. In this section of our AI Orientaiton resource, we introduced PyTorch as a core deep learning framework, explained why virtual environments matter, and walked through installation pathways for different systems and hardware using pip or conda, including CPU-only options. It also covered how to verify that PyTorch is correctly installed, check whether GPU acceleration is available, and run a first tensor and autograd sanity check so you can confirm your environment is working as expected before moving on to deeper tensor concepts in the next notebook.</p>
+                    </div>
+                </div>
+            </div>
+            
+
+        <div class="page-navigation">
+            <a href="./what-is-ai.html" class="nav-button prev">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+                Previous
+            </a>
+            <a href="./tensors.html" class="nav-button next">
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </a></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>© All materials are copyright scryptIQ 2025</div>
+            <div>Static Notebook - Pre-executed Content</div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../assets/main.js"></script>
+    
+    <!-- Initialize syntax highlighting -->
+    <script>
+        // Set page ready flag immediately for PDF generation
+        window.pageReady = true;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+
+</body>
+</html>

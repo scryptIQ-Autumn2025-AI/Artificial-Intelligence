@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- MathJax for mathematical notation -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Pyodide and CodeMirror -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.20/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.20/theme/pastel-on-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.20/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.20/mode/python/python.min.js"></script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href=../assets/colours.css>
+    <link rel="stylesheet" href="../assets/shared-styles.css">
+    <link rel="stylesheet" href="../assets/nav-bar.css">
+    <link rel="stylesheet" href="../assets/module_card.css">
+    <link rel="stylesheet" href="../assets/learning_outcomes.css">
+    <link rel="stylesheet" href="../assets/learning_lists.css">
+    <link rel="stylesheet" href="../assets/box_styles.css">
+    <link rel="stylesheet" href="../assets/code_styles.css">
+    
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scryptIQ - AI0 - What is AI?</title>
+    <script>window.LESSON_FILES = []; window.LESSON_PACKAGES = [];</script>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a href="../homepage.html" style="text-decoration: none; display: inline-block;">
+                <img src="../assets/scryptIQ_logo_dark.png" alt="scryptIQ Logo" class="sidebar-logo">
+            </a>
+        </div>
+
+        <h3>Content</h3>
+        <ul>
+            <li><a href="./introduction.html" class="">Introduction</a></li>
+            <li>
+                <div class="nav-toggle active" data-target="expandable-section-1">
+                    What is AI?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <ul class="nested-nav expanded" id="expandable-section-1"><li><a href="#introduction">Introduction</a></li><li><a href="#defining-ai">Defining AI</a></li><li><a href="#what-ai-can-and-cannot-do">What AI can and cannot do</a></li><li><a href="#ai-and-its-components">AI and its components:</a></li><li><a href="#categorising-ai">Categorising AI</a></li><li><a href="#generative-ai">Generative AI</a></li><li><a href="#popular-llms">Popular LLMs</a></li><li><a href="#the-ethics-of-ai">The ethics of AI</a></li>
+                </ul>
+            </li><li><a href="./pytorch.html">PyTorch</a></li><li><a href="./tensors.html">Tensors</a></li><li><a href="./feedback.html">Feedback</a></li>
+        </ul>
+
+        <h3 class="collapsible-header collapsed">
+            Resources
+            <span class="collapse-icon">►</span>
+        </h3>
+        <div class="collapsible-content collapsed">
+            <ul>
+                <li><a href="./glossary.html">Glossary</a></li><li><a href="./downloads.html">Downloads</a></li><li><a href="../HB/introduction.html">Handbook</a></li>
+            </ul>
+        </div>
+
+        <h3>
+            <li><a href="./report-issue.html">Report an Issue</a></li>
+        </h3>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
+
+    <!-- Main Content Area -->
+    <div id="main-content" class="main-content">
+        <!-- Top Navigation Bar -->
+        <div class="top-navbar">
+            <h1 class="page-title">Artificial Intelligence Orientation</h1>
+            <div class="nav-actions">
+                <a href="../homepage.html" class="text-button" title="Materials homepage">
+                    Homepage
+                </a>
+                <a href="https://scryptiq.ai/my-cohorts/" class="text-button scryptiq-button" title="Find out more about us">
+                    scryptIQ
+                </a>
+            </div>
+        </div>
+
+        
+            <div class="module-card" id="introduction">
+                <div class="module-header">
+                    What is AI? <span class="module-tag">AI0</span>
+                </div>
+                <div class="module-body">
+                    <h3>Learning Objectives</h3>
+                    <div class="learning-outcomes">
+                        <div class="outcome-item">
+                    <span class="outcome-number">1</span>
+                    <span class="outcome-text">Define Artificial Intelligence and distinguish between Narrow AI and General AI</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">2</span>
+                    <span class="outcome-text">Explain how AI systems differ from traditional rule-based computer programming</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">3</span>
+                    <span class="outcome-text">Identify the core components that enable AI systems, including data, algorithms and compute</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">4</span>
+                    <span class="outcome-text">Describe the major subfields within Artificial Intelligence and how they relate to one another</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">5</span>
+                    <span class="outcome-text">Explain why Generative AI represents a significant shift in AI capability and impact</span>
+                </div>
+                    </div>
+                    <h3>Introduction</h3>
+                    <p>As with our <a href="../PF0/introduction.html">Python Orientation</a> module, this AI orientation resource provides useful background information and serves as a reference guide before the lessons in this module. It is intended as a foundation for understanding the principles of Artificial Intelligence before we dive into code itself.<br><br>The resource introduces AI capability categories, different methodological paradigms, the concept of <strong>tensors</strong>, and our chosen Python framework for building AI and deep learning models: <strong>PyTorch</strong>. It is intended to help you gain a clear understanding of what AI is, how it works, and in which contexts it is most useful. By the end of this orientation, you should be able to engage with the upcoming AI code in this module with confidence, follow lesson explanations more easily, and contextualise your practice as you begin building models.</p>
+                </div>
+            </div>
+            
+            <div class="module-card" id="defining-ai">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Defining AI</h3>
+                        <p>At its core, Artificial Intelligence (AI) is the product of endeavouring to simulate human intelligence processes, <em>in silico</em>. These processes include:<br><ul class="nested-list"><li><strong>Learning</strong>: the acquisition of information and rules for using the information.</li><br><li><strong>Reasoning</strong>: using rules to reach approximate or definite conclusions</li><br><li><strong>Self-correction</strong>: optimisation through learning from mistakes</li></ul></p><p><img src="./images/Fig_ai_workflow.png" alt="AI workflow diagram showing data, training, model and inference" class="notebook-image"></p><h4>Narrow and general AI</h4>
+        <div class="info-box key-terms-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                KEY TERMS
+            </div>
+            <div class="box-content">
+                <p><strong>Narrow AI</strong>: Designed to perform a narrow task (e.g., facial recognition, internet searches, driving a car). Most current AI is here.<br><br><strong>General AI</strong>: A system with generalised human cognitive abilities. It can solve unfamiliar problems across a wide variety of domains. At the time of writing, we have yet to truly achieve generalised intelligence in an AI system.</p>
+            </div>
+        </div>
+        <p><img src="./images/Fig_narrow_vs_general.png" alt="Diagram comparing narrow AI and general AI" class="notebook-image"></p><p>Systems that fall under <strong>Narrow AI</strong> can still appear highly &#x27;intelligent&#x27;, even though their behaviour is tightly constrained by their training data, objectives and operating context. A system that performs exceptionally well at one task does not automatically possess understanding or reasoning in a broader sense, and its competence does not transfer to unfamiliar problems without significant redesign or retraining.<br><br><strong>General AI</strong>, however, implies intelligence that can extrapolate beyond knowledge, reason across different contexts and apply learning flexibly in ways that more closely resemble real human cognition.<br><br>Understanding this gap helps to distinguish both the impressive capabilities and limitations of existing AI systems, and provides essential context for discussions around automation, responsibility, safety and long-term societal impact.</p><h4>A brief history of AI</h4><p>AI is far from a novel concept. It has a rich history dating back to classical philosophers who attempted to describe human thinking as a symbolic system. However, the field of AI was not formally founded until 1956, at the Dartmouth Summer Research Project on Artificial Intelligence.<br><br>Fast forward to November 2022, and <strong>ChatGPT</strong> was released, making large language models accessible to the mainstream for the first time via a simple conversational interface. This marked a shift from Generative AI being largely a research or specialist tool to something the public had direct access to, sparking rapid adoption, experimentation, and debate around creativity, work, education, and the future role of AI in our lives.<br><br>Across the decades between those milestones, progress was not linear. AI experienced periods of intense optimism followed by &quot;AI winters&quot;, where funding and expectations dropped because results could not yet match ambition. Renewed progress in data availability, GPU computing and deep learning methods, especially from the 2010s onward, created the modern wave of practical AI systems now used in research, industry and education.</p><p><img src="./images/Fig_ai_timeline.png" alt="Timeline of selected milestones in AI history" class="notebook-image"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="what-ai-can-and-cannot-do">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>What AI can and cannot do</h3>
+                        <p>This table covers a few of AI&#x27;s most obvious strengths and limitations. The context here is largely from an LLM-centred vantage point.<br><br></p><table class="markdown-table">
+<thead>
+<tr>
+<th>Strengths</th>
+<th>Limitations</th>
+<th>Scientific / Real-World Implications (Biosciences)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rapidly generates code, explanations and experimental ideas.</td>
+<td>Can produce plausible but incorrect outputs (hallucinations).</td>
+<td>Validate outputs against primary literature, curated datasets and experimental controls before drawing biological conclusions.</td>
+</tr>
+<tr>
+<td>Detects statistical patterns in large datasets.</td>
+<td>Often learns correlations, not causation (unless specifically prompted).</td>
+<td>Avoid causal claims without mechanistic evidence, proper controls or experimental validation.</td>
+</tr>
+<tr>
+<td>Scales to high-dimensional biological data.</td>
+<td>Sensitive to data quality, class imbalance and preprocessing choices.</td>
+<td>Poorly curated or biased datasets can lead to misleading biomarkers or unstable models. Rigorous data cleaning and validation are significant.</td>
+</tr>
+<tr>
+<td>Produces confident, fluent reasoning across domains.</td>
+<td>Confidence does not always equal correctness, and can sometimes mislead the user into fallacy.</td>
+<td>Evaluate models using quantitative metrics, cross-validation and independent test sets rather than subjective plausibility.</td>
+</tr>
+<tr>
+<td>Can summarise literature and integrate multiple sources quickly.</td>
+<td>May oversimplify nuance or miss domain-specific subtleties.</td>
+<td>Use outputs as a synthesis tool, not a substitute for domain expertise and critical appraisal.</td>
+</tr>
+<tr>
+<td>Identifies complex, non-linear patterns beyond simple statistics.</td>
+<td>Limited transparency unless explicitly analysed.</td>
+<td>Apply interpretability methods and biological reasoning to assess whether learned features are scientifically meaningful.</td>
+</tr>
+<tr>
+<td>Automates repetitive analytical and coding tasks.</td>
+<td>Dependent on training data and prior knowledge.</td>
+<td>Check tool versions, database updates, and evolving standards in genomics, imaging and clinical research.</td>
+</tr>
+<tr>
+<td>Generates multiple modelling or analytical strategies.</td>
+<td>May reflect biases present in training data.</td>
+<td>Assess demographic, sampling and experimental bias to avoid inequitable or non-generalisable findings.</td>
+</tr>
+</tbody>
+</table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="ai-and-its-components">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>AI and its components:</h3>
+                        <p>Modern AI systems comprise the following three components:<br><ol class="nested-list"><li><strong>Data</strong>: The fuel for learning and rule-making. This can be text, images, code and / or numbers: in any quantity.</li><br><li><strong>Algorithms</strong>: The engine of an AI model. Mathematical structures (like Neural Networks) that process the data.</li><br><li><strong>Computing Power</strong>: The physical resource that a model requires to compute, predict and calculate. These include Graphics Processing Units (GPUs) and Tensor Processing Units (TPUs) designed to perform the complex calculations required for training.</li></ol></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="categorising-ai">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Categorising AI</h3>
+                        <p>There are several terms that you will encounter, many of which are blurred or incorrectly conflated with other terminology. It helps to be precise here:<br><br><strong>Machine learning, deep learning, natural language processing</strong> and <strong>computer vision</strong> are <em>not</em> four equivalent &quot;types&quot; of AI.<br><br>They belong to <em>different categories</em> (some are methods and some are application domains).</p><h4>By capability</h4><p><ul class="nested-list"><li><strong>Narrow AI (Weak AI)</strong>: Systems designed for specific tasks (all practical AI today).</li><br><li><strong>General AI (AGI)</strong>: A hypothetical system with broad, human-like problem-solving ability across domains.</li><br><li><strong>Superintelligence (ASI)</strong>: A hypothetical level beyond human cognitive performance.</li></ul></p><h4>By domain (the kind of task it works on)</h4><p><ul class="nested-list"><li><strong>Natural Language Processing (NLP)</strong>: Understanding and generating human language.</li><br><li><strong>Computer Vision (CV)</strong>: Understanding images and video.</li><br><li><strong>Speech AI</strong>: Speech recognition, synthesis, and audio understanding.</li><br><li><strong>Robotics AI</strong>: Perception, planning, and control for physical systems.</li></ul></p><h4>By approach (how an AI system is built)</h4><p><ul class="nested-list"><li><strong>Symbolic AI (Rule-based AI)</strong>: Uses explicit rules and logic.</li><br><li><strong>Machine Learning (ML)</strong>: Learns patterns from data instead of relying only on hand-written rules.</li><br><li><strong>Deep Learning (DL)</strong>: A subset of ML using multi-layer neural networks.</li><br><li><strong>Reinforcement Learning (RL)</strong>: Learns through trial-and-error using rewards and penalties.</li><br><li><strong>Generative AI</strong>: Models that generate new content (text, code, images, audio, video).</li></ul></p><h4>For emphasis</h4><p><ul class="nested-list"><li><strong>ML and DL</strong> are mostly <strong>approaches</strong>.</li><br><li><strong>NLP and CV</strong> are mostly <strong>domains</strong>.</li><br><li>A modern system can combine several at once (for example, a vision-language model can use DL + NLP + CV + Generative AI).</li></ul></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="generative-ai">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Generative AI</h3>
+                        
+        <div class="info-box key-terms-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                KEY TERMS
+            </div>
+            <div class="box-content">
+                <p><strong>Generative AI</strong> refers to a class of AI systems that learn the underlying structure of data in order to <em>generate new, original content</em> (such as text, images, audio or code). Rather than simply classifying or labelling inputs, these models produce novel outputs by synthesising patterns learned from large datasets.<br><br><strong>Transformer</strong> – A neural network architecture that uses self-attention to model relationships between all tokens in a sequence simultaneously.<br><br><strong>GPT (Generative Pre-trained Transformer)</strong> – A large language model built on the transformer architecture, pre-trained to predict the next token in text and capable of generating new content.</p>
+            </div>
+        </div>
+        <p>Generative AI represents a conceptual shift in how AI systems are designed and used. Traditional <em>discriminative</em> models are trained to recognise or classify existing data, answering questions such as whether an image contains a cat, or whether or not an email is spam. <em>Generative</em> models, by contrast, learn the underlying structure of data itself, allowing them to create new examples that resemble what they were trained on, such as generating images or writing text. Generative models can even produce code in multiple different programming languages, generate music, speech or even video.<br><br>Modern <strong>Large Language Models (LLMs)</strong>, such as GPT-5 and Gemini, are prominent examples of Generative AI. Rather than retrieving memorised responses, these models generate new outputs by synthesising patterns learned from <em>vast</em> amounts of data. This enables them to do all of the above, and even perform multi-step reasoning in ways that feel flexible and creative, even though the outputs are <em>entirely grounded in statistical learning</em> rather than true understanding: even if it may seem that way to the user.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="popular-llms">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Popular LLMs</h3>
+                        <p>This table lists a few of the popular LLMs at he time of writing. All information is contextual and updated as of February 2026.<br><br></p><table class="markdown-table">
+<thead>
+<tr>
+<th>Model</th>
+<th>Developer</th>
+<th>Architecture</th>
+<th>Multimodal</th>
+<th>Pricing</th>
+<th>Positioning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GPT-5.2</strong></td>
+<td>OpenAI</td>
+<td>Dense transformer, tool-optimised</td>
+<td>Yes</td>
+<td>Premium tier</td>
+<td>Frontier reasoning, coding, agent workflows</td>
+</tr>
+<tr>
+<td><strong>GPT-5.2-Instant</strong></td>
+<td>OpenAI</td>
+<td>Dense transformer (efficient variant)</td>
+<td>Yes</td>
+<td>Lower-cost tier</td>
+<td>Fast, cost-efficient deployment</td>
+</tr>
+<tr>
+<td><strong>Claude 4.6 Sonnet</strong></td>
+<td>Anthropic</td>
+<td>Dense transformer, Constitutional AI</td>
+<td>Yes (text + image)</td>
+<td>Mid-tier</td>
+<td>Long-context reasoning, structured outputs</td>
+</tr>
+<tr>
+<td><strong>Claude 4.6 Opus</strong></td>
+<td>Anthropic</td>
+<td>Large dense transformer</td>
+<td>Yes</td>
+<td>Premium tier</td>
+<td>Deep multi-step reasoning</td>
+</tr>
+<tr>
+<td><strong>Gemini 3.1 Pro</strong></td>
+<td>Google DeepMind</td>
+<td>Multimodal-native transformer</td>
+<td>Yes</td>
+<td>Usage-based / enterprise</td>
+<td>Very long context, strong multimodal integration</td>
+</tr>
+<tr>
+<td><strong>Gemini 3.1 Flash</strong></td>
+<td>Google DeepMind</td>
+<td>Dense transformer (efficiency-focused)</td>
+<td>Yes</td>
+<td>Lower-cost tier</td>
+<td>Speed-optimised production model</td>
+</tr>
+<tr>
+<td><strong>LLaMA 3.1 (405B)</strong></td>
+<td>Meta</td>
+<td>Dense transformer (open-weight)</td>
+<td>Text (multimodal via add-ons)</td>
+<td>Open weights (infra cost)</td>
+<td>Large open research model</td>
+</tr>
+<tr>
+<td><strong>Mixtral 12x22B (MoE)</strong></td>
+<td>Mistral AI</td>
+<td>Sparse Mixture-of-Experts transformer</td>
+<td>Text</td>
+<td>Open / API</td>
+<td>Efficient expert routing architecture</td>
+</tr>
+<tr>
+<td><strong>Command R++</strong></td>
+<td>Cohere</td>
+<td>Dense transformer (retrieval-optimised)</td>
+<td>Text</td>
+<td>Enterprise pricing</td>
+<td>Retrieval-augmented enterprise tasks</td>
+</tr>
+</tbody>
+</table><p><br><br>\*Pricing changes frequently and depends on input/output token mix.</p>
+        <div class="info-box key-terms-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                KEY TERMS
+            </div>
+            <div class="box-content">
+                <p>Terms used in the table, above:<br><ul class="nested-list"><li><strong>Dense Transformer</strong> – All model parameters are active for every token processed.</li><br><li><strong>Mixture-of-Experts (MoE)</strong> – Only a subset of the network is activated per token, improving efficiency.</li><br><li><strong>Multimodal</strong> – Can process inputs beyond text, such as images, audio or video.</li><br><li><strong>Constitutional AI</strong> – Alignment method that uses explicit guiding principles during training.</li><br><li><strong>Open Weights</strong> – Model parameters are publicly downloadable and self-hostable.</li><br><li><strong>Retrieval-Augmented</strong> – Designed to integrate external documents or databases during generation.</li><br><li><strong>Premium / Mid-tier / Lower-cost</strong> – Relative pricing categories; exact costs depend on usage and token volume.</li></ul></p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="the-ethics-of-ai">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>The ethics of AI</h3>
+                        <p>As AI becomes embedded in science, medicine and industry, ethical considerations must sit alongside technical progress. Ethical AI in research means building systems that are reliable, fair, transparent, accountable, secure and aligned with long-term human benefit.</p><p><img src="./images/Fig_ai_ethics.png" alt="" class="notebook-image"></p><h4>Bias and fairness</h4><p>AI systems learn from historical data, which may contain social, cultural or institutional biases. Without careful evaluation, models can reproduce or amplify inequalities. Ethical AI requires diverse datasets, bias detection and active correction.</p><h4>Transparency and explainability</h4><p>Many modern AI systems operate as complex black boxes. In research and high-stakes domains such as medicine or engineering, users must be able to understand, document and scrutinise how models reach conclusions.</p><h4>Data integrity and provenance</h4><p>AI models are only as reliable as the data used to train them. Ethical practice includes ensuring informed consent, anonymisation where required, careful documentation of data origins and critical assessment of data quality.</p><h4>Human oversight and responsibility</h4><p>AI does not replace accountability. Researchers remain responsible for interrogating model outputs, validating predictions and preventing harmful misapplication. AI should augment, not replace, human expertise.</p><h4>Security and privacy</h4><p>Sensitive datasets - from patient records to unpublished research - require secure storage, controlled access and compliance with data protection laws such as GDPR. Internal deployment and private infrastructure can reduce risk.</p><h4>Sustainability and environmental impact</h4><p>Large AI models can carry significant energy and carbon costs. Responsible use includes right-sizing models to tasks, avoiding unnecessary retraining and considering environmental impact in deployment decisions.</p><h4>Equity and access</h4><p><br>If only well-funded institutions can access advanced AI systems, inequalities in research capability may widen. Ethical AI includes promoting accessibility, open alternatives and fair resource allocation.</p><h4>Alignment and misuse prevention</h4><p>As AI systems grow more autonomous, their objectives must align with human values and societal norms. Safeguards are needed to prevent misuse, including misinformation, surveillance and harmful automation.</p>
+                    </div>
+                </div>
+            </div>
+            
+
+        <div class="page-navigation">
+            <a href="./introduction.html" class="nav-button prev">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+                Previous
+            </a>
+            <a href="./pytorch.html" class="nav-button next">
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </a></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>© All materials are copyright scryptIQ 2025</div>
+            <div>Powered by Pyodide</div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../assets/main.js"></script>
+    
+    <!-- Pyodide Initialisation Script -->
+    <script>
+
+// Generalisable Pyodide Initialisation Script
+// Variables and state build up naturally as code blocks execute in order
+
+async function main() {
+    // Show loading message for all output elements
+    document.querySelectorAll(".output").forEach(el => {
+        el.textContent = "Loading Pyodide...";
+        el.classList.add("loading-message");
+    });
+    
+    try {
+        // Load Pyodide
+        console.log("Loading Pyodide...");
+        const pyodideStartTime = performance.now();
+        let pyodide = await loadPyodide();
+        const pyodideLoadTime = performance.now() - pyodideStartTime;
+        console.log(`Pyodide loaded in ${pyodideLoadTime.toFixed(2)}ms`);
+        
+        // Load required packages only if specified
+        const lessonPackages = window.LESSON_PACKAGES || [];
+        
+        if (lessonPackages.length > 0) {
+            console.log("Loading required Python packages...");
+            const packagesStartTime = performance.now();
+            
+            // Separate built-in packages from PyPI packages
+            const builtInPackages = lessonPackages.filter(pkg => 
+                ['numpy', 'scipy', 'matplotlib', 'pandas', 'scikit-learn', 'pillow', 'regex'].includes(pkg)
+            );
+            
+            const micropipPackages = lessonPackages.filter(pkg => !builtInPackages.includes(pkg));
+            
+            // Load built-in packages (fast)
+            if (builtInPackages.length > 0) {
+                await pyodide.loadPackage(builtInPackages);
+                console.log(`Loaded built-in packages: ${builtInPackages.join(', ')}`);
+            }
+            
+            // Install PyPI packages (slower)
+            if (micropipPackages.length > 0) {
+                await pyodide.loadPackage(['micropip']);
+                const micropip = pyodide.pyimport('micropip');
+                await micropip.install(micropipPackages);
+                console.log(`Installed PyPI packages: ${micropipPackages.join(', ')}`);
+            }
+            
+            const packagesLoadTime = performance.now() - packagesStartTime;
+            console.log(`Packages loaded in ${packagesLoadTime.toFixed(2)}ms`);
+            console.log(`Total initialisation time: ${(pyodideLoadTime + packagesLoadTime).toFixed(2)}ms`);
+        } else {
+            console.log("No packages to load for this lesson");
+            console.log(`Total initialisation time: ${pyodideLoadTime.toFixed(2)}ms`);
+        }
+
+        // Only set up basic Python environment - no pre-loaded variables
+        await pyodide.runPythonAsync(`
+            import sys
+            from io import StringIO
+        `);
+
+        // Only set up matplotlib if it's in the loaded packages
+        if (lessonPackages.includes('matplotlib')) {
+            await pyodide.runPythonAsync(`
+                # Set up matplotlib for web rendering
+                import matplotlib
+                matplotlib.use('AGG')
+                import matplotlib.pyplot as plt
+                import io
+                import base64
+                
+                def capture_matplotlib():
+                    """Capture current matplotlib figure as HTML img tag"""
+                    buf = io.BytesIO()
+                    plt.savefig(buf, format='png', bbox_inches='tight', dpi=100)
+                    buf.seek(0)
+                    img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+                    plt.close()
+                    return f'<img src="data:image/png;base64,{img_base64}" style="max-width: 100%; height: auto;" />'
+            `);
+            console.log('Matplotlib capture function set up');
+        }
+        
+        console.log("Pyodide loaded successfully");
+        
+        // Load remote files if URLs are specified
+        const lessonFiles = window.LESSON_FILES || [];
+        
+        if (lessonFiles.length > 0) {
+            try {
+                console.log(`Checking for ${lessonFiles.length} remote file(s) to load...`);
+                
+                // Build Python code to load all files dynamically
+                let pythonCode = `
+from pyodide.http import pyfetch
+import os
+
+# Create data directory if it doesn't exist
+os.makedirs('./data', exist_ok=True)
+`;
+                
+                // Add loading code for each file
+                for (const file of lessonFiles) {
+                    if (file.is_binary) {
+                        // Binary files (images, etc.) - use bytes
+                        pythonCode += `
+# Load ${file.filename} (binary)
+try:
+    response = await pyfetch("${file.url}")
+    content = await response.bytes()
+    with open('./data/${file.filename}', 'wb') as f:
+        f.write(bytes(content))
+    print("Loaded: ${file.filename}")
+except Exception as e:
+    print(f"Could not load ${file.filename}: {e}")
+`;
+                    } else {
+                        // Text files (CSV, etc.) - use string
+                        pythonCode += `
+# Load ${file.filename} (text)
+try:
+    response = await pyfetch("${file.url}")
+    content = await response.string()
+    with open('./data/${file.filename}', 'w') as f:
+        f.write(content)
+    print("Loaded: ${file.filename}")
+except Exception as e:
+    print(f"Could not load ${file.filename}: {e}")
+`;
+                    }
+                }
+                
+                await pyodide.runPythonAsync(pythonCode);
+                console.log("Remote files loaded successfully");
+            } catch (error) {
+                console.warn("Error loading remote files (continuing anyway):", error);
+            }
+        } else {
+            console.log("No remote files to load for this lesson");
+        }
+        
+        // Function to execute Python code and capture output
+        async function executePythonCode(code) {
+            try {
+                // Redirect Python stdout and stderr to capture print statements and warnings
+                await pyodide.runPythonAsync(`
+                    old_stdout = sys.stdout
+                    old_stderr = sys.stderr
+                    sys.stdout = mystdout = StringIO()
+                    sys.stderr = mystderr = StringIO()
+                `);
+
+                // Run the user code.
+                // We pass the code string via pyodide.globals to avoid JS-string escaping
+                // issues, then use Python's ast module to execute it.  The last expression
+                // (if any) is eval-ed inside Python so that repr() is called there —
+                // this means display settings such as np.set_printoptions() are always
+                // respected before the value crosses the Python→JS boundary.
+                // (Pyodide auto-converts numpy arrays to TypedArray, so String(result)
+                // would bypass numpy's formatting entirely.)
+                pyodide.globals.set('__cell_code__', code);
+                await pyodide.runPythonAsync(`
+import ast as _ast
+__cell_result__ = None
+try:
+    _tree = _ast.parse(__cell_code__)
+    if _tree.body and isinstance(_tree.body[-1], _ast.Expr):
+        _last = _tree.body.pop()
+        exec(compile(_ast.Module(body=_tree.body, type_ignores=[]), '<cell>', 'exec'), globals())
+        _val = eval(compile(_ast.Expression(body=_last.value), '<cell>', 'eval'), globals())
+        if _val is not None:
+            __cell_result__ = repr(_val)
+    else:
+        exec(compile(_tree, '<cell>', 'exec'), globals())
+finally:
+    for _k in ['_tree', '_last', '_val', '_ast']:
+        globals().pop(_k, None)
+    globals().pop('__cell_code__', None)
+`);
+
+                // Get the captured stdout and stderr
+                let stdout = await pyodide.runPythonAsync(`
+                    sys.stdout = old_stdout
+                    sys.stderr = old_stderr
+                    mystdout.getvalue()
+                `);
+
+                const stderr = await pyodide.runPythonAsync(`mystderr.getvalue()`);
+                if (stderr) {
+                    if (stdout) stdout += "\n";
+                    stdout += stderr;
+                }
+
+                // Retrieve the Python-side repr string (already formatted correctly)
+                const resultRepr = await pyodide.runPythonAsync(`
+_r = __cell_result__
+del __cell_result__
+_r
+`);
+
+                // Check for matplotlib figures only if matplotlib was loaded
+                const lessonPackages = window.LESSON_PACKAGES || [];
+                if (lessonPackages.includes('matplotlib')) {
+                    const hasFigures = await pyodide.runPythonAsync(`
+                        import matplotlib.pyplot as plt
+                        len(plt.get_fignums()) > 0
+                    `);
+
+                    if (hasFigures) {
+                        const figureHtml = await pyodide.runPythonAsync(`capture_matplotlib()`);
+                        if (stdout) stdout += "\n";
+                        stdout += figureHtml;
+                    }
+                }
+
+                // Combine stdout and result repr
+                let output = stdout;
+                if (resultRepr !== undefined && resultRepr !== null && String(resultRepr).trim() !== '') {
+                    if (output) output += "\n";
+                    output += String(resultRepr);
+                }
+                
+                return { success: true, output: output || "Code executed successfully (no output)" };
+                
+            } catch (error) {
+                // Attempt to restore stdout/stderr even on failure
+                try {
+                    await pyodide.runPythonAsync(`
+                        if 'old_stdout' in dir(): sys.stdout = old_stdout
+                        if 'old_stderr' in dir(): sys.stderr = old_stderr
+                    `);
+                } catch (_) {}
+                // Re-run through Python's traceback machinery to get a clean error message
+                let tracebackStr = '';
+                try {
+                    pyodide.globals.set('_traceback_code', code);
+                    await pyodide.runPythonAsync(`
+                        import traceback as _tb
+                        from io import StringIO as _SIO
+                        _trace_result = None
+                        _saved_io = (sys.stdout, sys.stderr)
+                        sys.stdout = sys.stderr = _SIO()
+                        try:
+                            exec(compile(_traceback_code, '<exec>', 'exec'), globals())
+                        except Exception:
+                            _trace_result = _tb.format_exc()
+                        finally:
+                            sys.stdout, sys.stderr = _saved_io
+                    `);
+                    const tbVal = await pyodide.runPythonAsync('_trace_result');
+                    if (tbVal) tracebackStr = tbVal;
+                } catch (_) {}
+                let displayMsg;
+                if (tracebackStr && tracebackStr.includes('File "<exec>"')) {
+                    const lines = tracebackStr.split('\n');
+                    let execIdx = -1;
+                    for (let i = lines.length - 1; i >= 0; i--) {
+                        if (lines[i].includes('File "<exec>"')) { execIdx = i; break; }
+                    }
+                    displayMsg = execIdx !== -1
+                        ? lines.slice(execIdx).join('\n').trim()
+                        : tracebackStr.trim();
+                } else {
+                    displayMsg = (error.message || '').trim() || error.type || String(error);
+                }
+                return { success: false, output: 'Error:\n' + displayMsg };
+            }
+        }
+        
+        // Execute all hidden code blocks first (for setup code like imports)
+        const hiddenCodeBlocks = Array.from(document.querySelectorAll('.hidden-code textarea'));
+        console.log(`Found ${hiddenCodeBlocks.length} hidden code blocks`);
+
+        for (const textarea of hiddenCodeBlocks) {
+            const code = textarea.value.trim();
+            if (!code) continue;
+            
+            console.log(`Executing hidden code block: ${textarea.id}`);
+            console.log(`Hidden code content: ${code.substring(0, 100)}...`);
+            const result = await executePythonCode(code);
+            
+            if (!result.success) {
+                console.error(`Error in hidden code block ${textarea.id}:`, result.output);
+            } else {
+                console.log(`Hidden code block ${textarea.id} executed successfully`);
+                console.log(`Result: ${result.output}`);
+            }
+        }
+
+        console.log("All hidden code blocks executed");
+        
+        // Get all fixed code blocks in document order
+        const fixedCodeBlocks = Array.from(document.querySelectorAll('.code-fixed textarea'));
+        
+        // Setup and execute fixed code blocks sequentially
+        for (const textarea of fixedCodeBlocks) {
+            const code = textarea.value.trim();
+            if (!code) continue;
+            
+            // Set up CodeMirror editor (read-only)
+            const editor = CodeMirror.fromTextArea(textarea, {
+                mode: "python",
+                theme: "pastel-on-dark",
+                lineNumbers: true,
+                readOnly: true,
+                viewportMargin: Infinity
+            });
+            
+            // Find corresponding output element
+            const outputId = textarea.id + '-output';
+            const outputElement = document.getElementById(outputId);
+            
+            if (outputElement) {
+                outputElement.textContent = "Running code...";
+                outputElement.classList.add("loading-message");
+                
+                // Execute the code (this maintains state for subsequent blocks)
+                const result = await executePythonCode(code);
+                
+                // Display the output - check if it's HTML
+                const trimmedOutput = result.output.trim();
+                console.log('Output length:', trimmedOutput.length);
+                console.log('Output starts with:', trimmedOutput.substring(0, 100));
+                
+                if (trimmedOutput.includes('<script') && trimmedOutput.includes('Plotly')) {
+                    // It's Plotly HTML output - extract just the body content
+                    console.log('Rendering as Plotly HTML');
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(result.output, 'text/html');
+                    // Clear the output element and append the body content
+                    outputElement.innerHTML = '';
+                    
+                    // Find and load external scripts first (like Plotly CDN)
+                    const externalScripts = Array.from(doc.querySelectorAll('script[src]'));
+                    const inlineScripts = Array.from(doc.querySelectorAll('script:not([src])'));
+                    
+                    // Append non-script content first
+                    Array.from(doc.body.children).forEach(child => {
+                        if (child.tagName !== 'SCRIPT') {
+                            outputElement.appendChild(child.cloneNode(true));
+                        }
+                    });
+                    
+                    // Load external scripts sequentially
+                    const loadScript = (src) => {
+                        return new Promise((resolve, reject) => {
+                            const script = document.createElement('script');
+                            script.src = src;
+                            script.onload = resolve;
+                            script.onerror = reject;
+                            document.head.appendChild(script);
+                        });
+                    };
+                    
+                    // Load all external scripts first
+                    Promise.all(externalScripts.map(s => loadScript(s.src)))
+                        .then(() => {
+                            console.log('External scripts loaded, executing inline scripts');
+                            // Now execute inline scripts
+                            inlineScripts.forEach(oldScript => {
+                                const newScript = document.createElement('script');
+                                newScript.textContent = oldScript.textContent;
+                                outputElement.appendChild(newScript);
+                            });
+                            console.log('Output element after processing:', outputElement.children.length, 'children');
+                        })
+                        .catch(err => {
+                            console.error('Failed to load external scripts:', err);
+                            outputElement.textContent = 'Error loading Plotly: ' + err.message;
+                        });
+                } else if (trimmedOutput.startsWith('<!DOCTYPE') || 
+                           trimmedOutput.startsWith('<html') ||
+                            trimmedOutput.startsWith('<div') ||
+                            trimmedOutput.startsWith('<img')) {
+                    console.log('Rendering as generic HTML');
+                    outputElement.innerHTML = result.output;
+                    console.log('Output element after innerHTML:', outputElement.children.length, 'children');
+                } else {
+                    console.log('Rendering as plain text');
+                    outputElement.textContent = result.output;
+                }
+                outputElement.classList.remove("loading-message");
+                if (result.success) {
+                    outputElement.classList.add("success-message");
+                    outputElement.classList.remove("error-message");
+                } else {
+                    outputElement.classList.add("error-message");
+                    outputElement.classList.remove("success-message");
+                }
+            }
+            
+            // Small delay to show progression
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        
+        // Set flag to indicate all FIXED cells have been executed
+        // This is used by PDF generation to ensure all outputs are ready
+        window.allCellsExecuted = true;
+        console.log("All FIXED cells executed successfully");
+        
+        // Setup all editable code blocks (but don't execute them)
+        document.querySelectorAll('.code-editor textarea').forEach((textarea) => {
+            // Set up CodeMirror editor (editable)
+            const editor = CodeMirror.fromTextArea(textarea, {
+                mode: "python",
+                theme: "pastel-on-dark",
+                lineNumbers: true,
+                viewportMargin: Infinity
+            });
+            
+            // Find corresponding run button and output element
+            const baseId = textarea.id;
+            const runButtonId = 'run-' + baseId;
+            const outputId = baseId + '-output';
+            
+            const runButton = document.getElementById(runButtonId);
+            const outputElement = document.getElementById(outputId);
+            
+            if (runButton && outputElement) {
+                // Set initial state
+                outputElement.textContent = "Ready to run code!";
+                outputElement.classList.remove("loading-message");
+                
+                runButton.addEventListener("click", async () => {
+                    const code = editor.getValue().trim();
+                    if (!code) {
+                        outputElement.textContent = "No code to run";
+                        return;
+                    }
+                    
+                    outputElement.textContent = "Running...";
+                    outputElement.classList.remove("error-message", "success-message");
+                    outputElement.classList.add("loading-message");
+                    
+                    // Execute the code (this also maintains state for future blocks)
+                    const result = await executePythonCode(code);
+                    
+                    // Display the output - check if it's HTML
+                    const trimmedOutput = result.output.trim();
+                    console.log('Output length:', trimmedOutput.length);
+                    console.log('Output starts with:', trimmedOutput.substring(0, 100));
+                    
+                    if (trimmedOutput.includes('<script') && trimmedOutput.includes('Plotly')) {
+                        // It's Plotly HTML output - extract just the body content
+                        console.log('Rendering as Plotly HTML');
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(result.output, 'text/html');
+                        // Clear the output element and append the body content
+                        outputElement.innerHTML = '';
+                        
+                        // Find and load external scripts first (like Plotly CDN)
+                        const externalScripts = Array.from(doc.querySelectorAll('script[src]'));
+                        const inlineScripts = Array.from(doc.querySelectorAll('script:not([src])'));
+                        
+                        // Append non-script content first
+                        Array.from(doc.body.children).forEach(child => {
+                            if (child.tagName !== 'SCRIPT') {
+                                outputElement.appendChild(child.cloneNode(true));
+                            }
+                        });
+                        
+                        // Load external scripts sequentially
+                        const loadScript = (src) => {
+                            return new Promise((resolve, reject) => {
+                                const script = document.createElement('script');
+                                script.src = src;
+                                script.onload = resolve;
+                                script.onerror = reject;
+                                document.head.appendChild(script);
+                            });
+                        };
+                        
+                        // Load all external scripts first
+                        Promise.all(externalScripts.map(s => loadScript(s.src)))
+                            .then(() => {
+                                console.log('External scripts loaded, executing inline scripts');
+                                // Now execute inline scripts
+                                inlineScripts.forEach(oldScript => {
+                                    const newScript = document.createElement('script');
+                                    newScript.textContent = oldScript.textContent;
+                                    outputElement.appendChild(newScript);
+                                });
+                                console.log('Output element after processing:', outputElement.children.length, 'children');
+                            })
+                            .catch(err => {
+                                console.error('Failed to load external scripts:', err);
+                                outputElement.textContent = 'Error loading Plotly: ' + err.message;
+                            });
+                    } else if (trimmedOutput.startsWith('<!DOCTYPE') || 
+                               trimmedOutput.startsWith('<html') ||
+                               trimmedOutput.startsWith('<div') ||
+                               trimmedOutput.startsWith('<img')) {
+                        outputElement.innerHTML = result.output;
+                    } else {
+                        outputElement.textContent = result.output;
+                    }
+                    outputElement.classList.remove("loading-message");
+                    if (result.success) {
+                        outputElement.classList.add("success-message");
+                        outputElement.classList.remove("error-message");
+                    } else {
+                        outputElement.classList.add("error-message");
+                        outputElement.classList.remove("success-message");
+                    }
+                });
+            }
+        });
+        
+        console.log("All code blocks initialised successfully");
+
+        // Set flag to indicate Pyodide is fully ready
+        window.pyodideReady = true;
+        console.log("Pyodide fully ready");
+        
+    } catch (error) {
+        console.error("Failed to initialise Pyodide:", error);
+        document.querySelectorAll(".output").forEach(el => {
+            el.textContent = "Error loading Pyodide: " + error.message;
+            el.classList.remove("loading-message");
+            el.classList.add("error-message");
+        });
+    }
+}
+
+// Start the application when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', main);
+} else {
+    main();
+}
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- MathJax for mathematical notation -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Syntax Highlighting with highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href=../assets/colours.css>
+    <link rel="stylesheet" href="../assets/shared-styles.css">
+    <link rel="stylesheet" href="../assets/nav-bar.css">
+    <link rel="stylesheet" href="../assets/module_card.css">
+    <link rel="stylesheet" href="../assets/learning_outcomes.css">
+    <link rel="stylesheet" href="../assets/learning_lists.css">
+    <link rel="stylesheet" href="../assets/box_styles.css">
+    <link rel="stylesheet" href="../assets/code_styles.css">
+    <link rel="stylesheet" href="../assets/static_output.css">
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scryptIQ - AI0 - Tensors</title>
+    
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a href="../homepage.html" style="text-decoration: none; display: inline-block;">
+                <img src="../assets/scryptIQ_logo_dark.png" alt="scryptIQ Logo" class="sidebar-logo">
+            </a>
+        </div>
+
+        <h3>Content</h3>
+        <ul>
+            <li><a href="./introduction.html" class="">Introduction</a></li><li><a href="./what-is-ai.html">What is AI?</a></li><li><a href="./pytorch.html">PyTorch</a></li>
+            <li>
+                <div class="nav-toggle active" data-target="expandable-section-3">
+                    Tensors
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <ul class="nested-nav expanded" id="expandable-section-3"><li><a href="#introduction">Introduction</a></li><li><a href="#tensors">Tensors</a></li><li><a href="#images-as-tensors">Images as tensors</a></li><li><a href="#types-of-tensors">Types of tensors</a></li><li><a href="#indexing-and-slicing-tensors">Indexing and slicing tensors</a></li><li><a href="#reshaping-tensors">Reshaping tensors</a></li><li><a href="#tensor-operations">Tensor operations</a></li><li><a href="#initialising-tensors">Initialising tensors</a></li><li><a href="#tensor-data-types">Tensor data types</a></li><li><a href="#summary">Summary</a></li>
+                </ul>
+            </li><li><a href="./feedback.html">Feedback</a></li>
+        </ul>
+
+        <h3 class="collapsible-header collapsed">
+            Resources
+            <span class="collapse-icon">►</span>
+        </h3>
+        <div class="collapsible-content collapsed">
+            <ul>
+                <li><a href="./glossary.html">Glossary</a></li><li><a href="./downloads.html">Downloads</a></li><li><a href="../HB/introduction.html">Handbook</a></li>
+            </ul>
+        </div>
+
+        <h3>
+            <li><a href="./report-issue.html">Report an Issue</a></li>
+        </h3>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
+
+    <!-- Main Content Area -->
+    <div id="main-content" class="main-content">
+        <!-- Top Navigation Bar -->
+        <div class="top-navbar">
+            <h1 class="page-title">Artificial Intelligence Orientation</h1>
+            <div class="nav-actions">
+                <a href="../homepage.html" class="text-button" title="Materials homepage">
+                    Homepage
+                </a>
+                <a href="https://scryptiq.ai/my-cohorts/" class="text-button scryptiq-button" title="Find out more about us">
+                    scryptIQ
+                </a>
+            </div>
+        </div>
+
+        
+            <div class="module-card" id="introduction">
+                <div class="module-header">
+                    Tensors <span class="module-tag">AI0</span>
+                </div>
+                <div class="module-body">
+                    <h3>Learning Objectives</h3>
+                    <div class="learning-outcomes">
+                        <div class="outcome-item">
+                    <span class="outcome-number">1</span>
+                    <span class="outcome-text">Explain what a tensor is and why tensors are central to modern AI</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">2</span>
+                    <span class="outcome-text">Distinguish between scalars, vectors, matrices and higher-dimensional tensors</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">3</span>
+                    <span class="outcome-text">Interpret tensor shape, dimensionality and datatype in practical PyTorch examples</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">4</span>
+                    <span class="outcome-text">Compare tensor data types and explain precision and performance trade-offs</span>
+                </div>
+<div class="outcome-item">
+                    <span class="outcome-number">5</span>
+                    <span class="outcome-text">Apply explicit typecasting with `dtype` when creating tensors in PyTorch</span>
+                </div>
+                    </div>
+                    <h3>Introduction</h3>
+                    <p>Now that your PyTorch environment is installed and verified, we can focus on tensors in more detail, as they are the core data structure used across machine learning and deep learning workflows.<br><br>We will move from simple tensor forms to higher-dimensional representations, then examine datatypes and typecasting so you can work with tensors more confidently in later model-building lessons.</p>
+                </div>
+            </div>
+            
+            <div class="module-card" id="tensors">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Tensors</h3>
+                        <p>Behind every modern AI system, key technical and ethical concerns ultimately connect back to how information is represented, processed and acted upon. Decisions about bias, transparency and alignment are shaped by the data an AI system sees and the way that data is structured internally. To understand how AI models learn from data and why certain limitations arise, it is useful to look more closely at the <em>mathematical objects</em> used to <em>represent</em> information inside these systems. One of the most fundamental of these objects is the <strong>tensor</strong>.<br><br>Imagine you need to describe five people. You might choose to describe them with data attributed to each person. For example height, weight, age and gender. If we proceed, we could format this information into a table with five rows and four columns:</p><table class="markdown-table">
+<thead>
+<tr>
+<th></th>
+<th>Height</th>
+<th>Weight</th>
+<th>Age</th>
+<th>gender</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>170</td>
+<td>78</td>
+<td>30</td>
+<td>1</td>
+</tr>
+<tr>
+<td>B</td>
+<td>165</td>
+<td>50</td>
+<td>24</td>
+<td>0</td>
+</tr>
+<tr>
+<td>C</td>
+<td>180</td>
+<td>88</td>
+<td>28</td>
+<td>1</td>
+</tr>
+<tr>
+<td>D</td>
+<td>181</td>
+<td>87</td>
+<td>30</td>
+<td>1</td>
+</tr>
+<tr>
+<td>E</td>
+<td>166</td>
+<td>78</td>
+<td>20</td>
+<td>0</td>
+</tr>
+</tbody>
+</table><p>We can then format this data into a matrix, as follows:<br><br>$$
+\left(
+\begin{matrix}
+170 & 78 & 30 & 1 \\
+165 & 50 & 24 & 0\\
+180 & 88 & 28 & 1\\
+181 & 87 & 30 & 1\\
+166 & 78 & 20 & 0\
+\end{matrix}
+\right)
+$$<br><br>This matrix is a <strong>tensor</strong>. In this case, it is a two-dimensional tensor where each row corresponds to an individual and each column corresponds to a measured attribute. In deep learning, any matrix that contains all the necessary data can also be referred to as a tensor.</p>
+        <div class="info-box key-terms-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                KEY TERMS
+            </div>
+            <div class="box-content">
+                <p>A <strong>tensor</strong> is a mathematical object that <em>generalises</em> scalars, vectors and matrices as <em>higher dimensions</em>. In practice, a tensor is an <em>n-dimensional array</em> of numerical values (not dissimilar to a NumPy array), where the number of dimensions (the <em>rank</em> of the tensor) determines its structure; ranging from a single number (a scalar), to a 1-dimensional vector, a 2-dimensional matrix, or higher-dimensional data. In machine learning and deep learning contexts, tensors are used to <em>represent</em> and <em>manipulate</em> data such as images, time series, text embeddings and model parameters in a consistent and efficient way.</p>
+            </div>
+        </div>
+        <h4>AI&#x27;s unifier</h4><p>Thinking in terms of tensors provides a unifying way to describe how diverse forms of data are handled within modern AI systems. Whether working with tables of measurements, images comprising individual pixels or strings of text, these <em>different data types can all be expressed as tensors</em> of varying dimensionality. This common representation allows the same mathematical operations and computational tools to be applied across very different problems, forming the foundation on which modern machine learning and deep learning methods are built.<br></p><h4>Tensors vs. NumPy arrays</h4><p>PyTorch tensors are conceptually very similar to NumPy arrays, and each can often be converted back and forth into the other, with minimal loss or disruption. However, tensors can support additional features such as <em>GPU acceleration</em> and <em>automatic differentiation</em> - advantages that NumPy arrays do not possess.<br><br>Understanding the relationship between tensors and NumPy arrays can help to bridge traditional scientific computing workflows with modern deep learning pipelines.</p>
+        <div class="info-box key-terms-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                KEY TERMS
+            </div>
+            <div class="box-content">
+                <p><strong>Automatic differentiation</strong> is one of PyTorch’s defining features; it contains an automatic differentiation system known as <strong>autograd</strong>. Autograd allows PyTorch to automatically compute gradients of tensor operations, a facet of the package that is essential for training neural networks using optimisation algorithms such as <strong>gradient descent</strong>. In practice, this means that PyTorch can track operations performed on tensors and compute derivatives without the user needing to do this manually.</p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="images-as-tensors">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Images as tensors</h3>
+                        <p>As we move into code examples, we can begin to explore tensors in a real-world setting. As we have previously stated, the role of tensors in an AI model is to represent real-world data in a numerical form that computers can store, manipulate and learn from. This means that images, text, audio and tabular data are all ultimately converted into tensors before they are processed by an AI model.<br><br>When it comes to images, these can be represented as a tensor with shape <code>[3, 224, 224]</code>, where the three dimensions correspond to <code>[colour_channels, height, width]</code>. In this case, the image has three colour channels (red, green and blue), a height of 224 pixels and a width of 224 pixels. Each value within the tensor represents the intensity of a particular colour at a specific pixel location.</p><p><img src="./images/Fig_tensor-shape-example.png" alt="example of going from an input image to a tensor representation of the image, image gets broken down into 3 colour channels as well as numbers to represent the height and width" class="notebook-image"></p><p>In tensor terminology, this image is a <strong>3-dimensional tensor</strong>, with one dimension for colour channels and two dimensions for spatial information. Understanding how images are structured in this way is essential for working with computer vision models, but before diving deeper, we will start by creating and manipulating simple tensors directly in code.</p>
+        <div class="info-box fact-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                FACT
+            </div>
+            <div class="box-content">
+                <p>If you previously completed the Data Handling module of our course, you will note that we would have previously represented an image as (height, width, channel count). This representation of images as a tuple, in this order, is referred to as <strong>channels-last</strong> convention. It is often used natively in image files, NumPy arrays and plotting libraries (such as matplotlib).<br><br>Our reference above to images in the (channel count, height, width) is referred to as the <strong>channels-first</strong> convention, and is often preferred by libraries such as PyTorch, and is used across other GPU-optimised tensor operations and a handful of popular deep learning models.</p>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="types-of-tensors">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Types of tensors</h3>
+                        <p>Nearly every operation in PyTorch involves creating, transforming or computing tensors, and much of the framework is built around a specific class: <code>torch.Tensor</code>. For this reason, it is worth becoming familiar with how tensors are defined and manipulated early on.</p><h4>Importing PyTorch for this notebook</h4>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-4">import torch
+
+print(f&quot;PyTorch version: {torch.__version__}&quot;)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">PyTorch version: 2.5.1+cpu
+</pre></div>
+        </div>
+        
+        <div class="info-box tip-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                TIP
+            </div>
+            <div class="box-content">
+                <p>As a short preparatory exercise, you are encouraged to spend around <strong>10 minutes</strong> reading through the official PyTorch documentation for <a href="https://pytorch.org/docs/stable/tensors.html"><code>torch.Tensor</code></a>. This is not intended to be read line-by-line or learned, but rather to build familiarity with the terminology and the kinds of operations that PyTorch supports. You may return to this documentation at any point as a reference.</p>
+            </div>
+        </div>
+        <h4>Scalars</h4><p>The simplest tensor we can create is a <strong>scalar</strong>. A scalar is a single numerical value and, in tensor terminology, it is referred to as a <strong>zero-dimensional tensor</strong>. Despite its simplicity, a scalar is still a tensor and supports the same underlying operations as higher-dimensional tensors.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-5"># Scalar
+
+scalar = torch.tensor(7)
+
+print(f&quot;{scalar}, {type(scalar)}&quot;, sep=&quot;\n&quot;)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">7, &lt;class &#x27;torch.Tensor&#x27;&gt;
+</pre></div>
+        </div>
+        <p>The printed value of <code>scalar</code> above is <code>tensor(7)</code>.<br><br>That means although <code>scalar</code> is a single number, it is still of type <code>torch.Tensor</code>.<br><br>We can check the dimensions of a tensor using the <code>ndim</code> attribute.</p>
+        <div class="info-box note-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                NOTE
+            </div>
+            <div class="box-content">
+                <p>As single values, it might be easy to wonder the role scalars have in an AI model. They can serve many purposes: from holding information such as the learning rate of a model, to its loss value (how well or poorly it is performing on a given dataset). They can also be used to store the values of individual hyperparameters (such as number of epochs) and metrics (such as accuracy, precision and recall). While they are simple in having a single dimension, and a single value, scalars often serve important roles in running, evaluating and improving AI models.</p>
+            </div>
+        </div>
+        <h4>Vectors</h4><p>Next, let&#x27;s create a <strong>vector</strong>. A vector is a one-dimensional tensor that can contain multiple numerical values. Unlike a scalar, which represents a single quantity, a vector allows us to represent several related measurements together in a structured way.<br><br>For example, a vector such as <code>[3, 2]</code> could be used to describe the number of <code>[leaves, petals]</code> on a flower. Extending this idea, a vector with the values <code>[3, 2, 5]</code> could represent <code>[leaves, petals, seeds]</code>. Each position in the vector, in this case, corresponds to a specific attribute, and the ordering of values gives them meaning, within the context of a vector.<br><br>The key idea is that vectors provide a flexible way to represent collections of related data. This same principle extends to higher-dimensional tensors, which allow increasingly complex data structures to be represented in a consistent numerical form.<br><br>Using the example above, we can create a tensor of type vector, using <code>torch.tensor</code>:</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-6"># Vector
+
+vector = torch.tensor([3, 2, 2])
+
+print(f&quot;{vector}, {type(vector)}&quot;, sep=&quot;\n&quot;)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">tensor([3, 2, 2]), &lt;class &#x27;torch.Tensor&#x27;&gt;
+</pre></div>
+        </div>
+        <h4>Matrices</h4><p>Moving up the hierarchy of tensor types, let&#x27;s now consider <strong>matrices</strong>. A matrix is a <em>two-dimensional tensor</em>, which allows us to represent <em>multiple related vectors</em> together in a structured way. While a vector can describe a single object using multiple values, a matrix can describe multiple objects that share the same set of attributes.<br><br>Let&#x27;s take an example of representing two flowers. The first flower has 3 leaves, 2 petals and 2 seeds, while the second flower has 4 leaves, 3 petals and 1 seed. Each flower can be represented as a vector of measurements, and these vectors can be stacked together to form a matrix:<br><br>\begin{pmatrix}<br>3 &amp; 2 &amp; 2 \\<br>4 &amp; 3 &amp; 1<br>\end{pmatrix}<br><br>In this matrix representation, each row corresponds to a flower, and each column corresponds to a specific attribute (leaves, petals and seeds). Matrices are commonly used to represent tabular data, where multiple observations are described by the same set of features; they form a natural bridge between vectors and higher-dimensional tensors.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-7"># Matrix
+matrix = torch.tensor([[3, 2, 2],
+                       [4, 3, 1]])
+print(f&quot;{matrix}, {type(matrix)}&quot;, sep=&quot;\n&quot;)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">tensor([[3, 2, 2],
+        [4, 3, 1]]), &lt;class &#x27;torch.Tensor&#x27;&gt;
+</pre></div>
+        </div>
+        <h4>3-dimensional tensors</h4><p>Moving further up the hierarchy again, we arrive at <strong>3-dimensional tensors</strong>. A 3-dimensional tensor extends the idea of a matrix in the same way that a matrix extends a vector: it allows us to represent <strong>multiple matrices stacked together along a new dimension</strong>.<br><br>Where a matrix is a collection of vectors, a <em>3-D tensor is a <strong>collection of matrices</strong></em>. This additional dimension can be used to represent different contexts, conditions or groupings of the same type of data. For example, in our flower dataset, a matrix might describe multiple flowers at a single time point, while a 3-dimensional tensor could represent measurements of those flowers taken across multiple days or different experimental conditions.<br><br>In practice, 3-dimensional tensors are commonly encountered when working with structured data such as images with colour channels, sequences of measurements over time, or grouped observations. Each dimension adds a new axis along which the data varies, while preserving a consistent internal structure. This ability to represent increasingly complex data in a systematic way is what makes tensors such a powerful abstraction in machine learning and deep learning.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-8"># 3-dimensional tensor
+tensor_3d = torch.tensor([[[3, 2, 2],
+                           [4, 3, 1],
+                           [6, 3, 4]]])
+print(f&quot;{tensor_3d}, {type(tensor_3d)}&quot;, sep=&quot;\n&quot;)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">tensor([[[3, 2, 2],
+         [4, 3, 1],
+         [6, 3, 4]]]), &lt;class &#x27;torch.Tensor&#x27;&gt;
+</pre></div>
+        </div>
+        <h4>N-dimensional tensors</h4><p>Beyond three dimensions, tensors continue to scale in the same consistent way. Each additional dimension introduces a <em>new axis</em> along which the data varies.<br><br>4-dimensional tensors, for example, are commonly used to represent batches of 3-dimensional data, such as collections of images, while 5- and higher-dimensional tensors appear in contexts that involve additional structure, such as time, depth and/or experimental conditions. Although these higher-dimensional tensors may be harder to visualise, they follow <em>exactly the same principles</em> as scalars, vectors and matrices, providing a <em>unified</em> framework for representing increasingly complex data in machine learning and deep learning.<br><br>The diagram below aims to conceptualise and illustrate all the tensor types that we covered, above.</p><p><img src="./images/tensors.png" alt="Diagram showing scalar, vector, matrix and higher-dimensional tensor structures" class="notebook-image"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="indexing-and-slicing-tensors">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Indexing and slicing tensors</h3>
+                        <p>Once tensors are created, we usually need to retrieve specific parts of them. Indexing lets us access one element or one row, while slicing lets us select ranges such as whole columns. This is a core skill for preparing data before model training.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-9">x = torch.tensor([[10, 20, 30],
+                  [40, 50, 60]])
+
+print(&quot;First row:&quot;, x[0])
+print(&quot;Second column:&quot;, x[:, 1])
+print(&quot;Single element (row 2, col 3):&quot;, x[1, 2])
+</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">First row: tensor([10, 20, 30])
+Second column: tensor([20, 50])
+Single element (row 2, col 3): tensor(60)
+</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="reshaping-tensors">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Reshaping tensors</h3>
+                        <p>In practical workflows, the same data often needs to be rearranged into different shapes. Reshaping changes the structure of a tensor without changing the underlying values, as long as the total number of elements stays the same.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-10">x = torch.arange(12)
+print(&quot;Original:&quot;, x)
+print(&quot;Original shape:&quot;, x.shape)
+
+reshaped = x.reshape(3, 4)
+print(&quot;\nReshaped:\n&quot;, reshaped)
+print(&quot;New shape:&quot;, reshaped.shape)
+</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">Original: tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])
+Original shape: torch.Size([12])
+
+Reshaped:
+ tensor([[ 0,  1,  2,  3],
+        [ 4,  5,  6,  7],
+        [ 8,  9, 10, 11]])
+New shape: torch.Size([3, 4])
+</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="tensor-operations">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Tensor operations</h3>
+                        <p>Element-wise operations are fundamental in tensor workflows. PyTorch lets you perform arithmetic between tensors and between a tensor and a scalar using standard mathematical operators.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-11">a = torch.tensor([1, 2, 3])
+b = torch.tensor([4, 5, 6])
+c = 10
+
+print(a + b)
+print(a + c)
+print(a * b)
+print(a * c)
+print(a / b)
+</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">tensor([5, 7, 9])
+tensor([11, 12, 13])
+tensor([ 4, 10, 18])
+tensor([10, 20, 30])
+tensor([0.2500, 0.4000, 0.5000])
+</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="initialising-tensors">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Initialising tensors</h3>
+                        <p>PyTorch provides helper functions for common tensor initialisation patterns. These are used frequently when setting up model inputs, masks or parameter values.</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-12">size = 2, 3
+
+zeros = torch.zeros(size)
+ones = torch.ones(size)
+random_uniform = torch.rand(size)
+
+print(&quot;Zeros:\n&quot;, zeros)
+print(&quot;\nOnes:\n&quot;, ones)
+print(&quot;\nRandom uniform:\n&quot;, random_uniform)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">Zeros:
+ tensor([[0., 0., 0.],
+        [0., 0., 0.]])
+
+Ones:
+ tensor([[1., 1., 1.],
+        [1., 1., 1.]])
+
+Random uniform:
+ tensor([[0.8467, 0.1844, 0.8729],
+        [0.4317, 0.6781, 0.7014]])
+</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="tensor-data-types">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Tensor data types</h3>
+                        <p>PyTorch supports a wide range of <strong>tensor datatypes</strong>, each of which determines how values are stored in memory and how numerical operations are performed. A full list is available in the official <a href="https://pytorch.org/docs/stable/tensors.html#data-types">PyTorch documentation</a>, but in practice only a subset of these datatypes are commonly used in machine learning and deep learning.<br><br>Different datatypes are optimised for different use cases. Some are primarily intended for CPU-based computation, while others are designed to take advantage of GPU hardware.</p>
+        <div class="info-box remember-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                REMEMBER
+            </div>
+            <div class="box-content">
+                <p>As noted earlier in this resource, seeing <code>torch.cuda</code> in PyTorch code specifically indicates that a tensor or operation is being placed on an NVIDIA GPU using CUDA. This does not apply to all GPUs. Apple Silicon devices use Metal Performance Shaders (MPS), accessed <em>via</em> <code>torch.backends.mps</code>, while AMD GPUs rely on different support, depending on the platform.<br><br>In all cases, the underlying idea is the same: tensors can be placed on specialised hardware to accelerate computation, but the API used depends on the GPU vendor and platform.<br><br>Feel free to make a note of the table below and refer back to it as needed when selecting datatypes in later exercises.</p>
+            </div>
+        </div>
+        <table class="markdown-table">
+<thead>
+<tr>
+<th>Datatype</th>
+<th>Bits</th>
+<th>Type</th>
+<th>CPU / GPU</th>
+<th>Typical Use</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.float32</code> (<code>torch.float</code>)</td>
+<td>32</td>
+<td>Floating point</td>
+<td>CPU & GPU</td>
+<td>Default datatype for training neural networks</td>
+<td>Good balance of precision, speed, and memory</td>
+</tr>
+<tr>
+<td><code>torch.float16</code> (<code>torch.half</code>)</td>
+<td>16</td>
+<td>Floating point</td>
+<td>GPU (limited CPU support)</td>
+<td>Mixed-precision training</td>
+<td>Faster and uses less memory, but lower numerical precision</td>
+</tr>
+<tr>
+<td><code>torch.float64</code> (<code>torch.double</code>)</td>
+<td>64</td>
+<td>Floating point</td>
+<td>CPU & GPU</td>
+<td>Scientific computing, high-precision calculations</td>
+<td>Slower and more memory-intensive</td>
+</tr>
+<tr>
+<td><code>torch.bfloat16</code></td>
+<td>16</td>
+<td>Floating point</td>
+<td>GPU (select hardware)</td>
+<td>Mixed-precision training</td>
+<td>More stable than float16 for some models</td>
+</tr>
+<tr>
+<td><code>torch.int8</code></td>
+<td>8</td>
+<td>Integer</td>
+<td>CPU & GPU</td>
+<td>Quantised models, storage</td>
+<td>Very memory-efficient, limited numeric range</td>
+</tr>
+<tr>
+<td><code>torch.int16</code></td>
+<td>16</td>
+<td>Integer</td>
+<td>CPU & GPU</td>
+<td>Specialised numeric tasks</td>
+<td>Less commonly used in deep learning</td>
+</tr>
+<tr>
+<td><code>torch.int32</code></td>
+<td>32</td>
+<td>Integer</td>
+<td>CPU & GPU</td>
+<td>Counters, indices</td>
+<td>Often used internally</td>
+</tr>
+<tr>
+<td><code>torch.int64</code> (<code>torch.long</code>)</td>
+<td>64</td>
+<td>Integer</td>
+<td>CPU & GPU</td>
+<td>Class labels, indexing</td>
+<td>Required for many PyTorch indexing operations</td>
+</tr>
+<tr>
+<td><code>torch.bool</code></td>
+<td>1</td>
+<td>Boolean</td>
+<td>CPU & GPU</td>
+<td>Masks, logical operations</td>
+<td>Stores <code>True</code> / <code>False</code> values</td>
+</tr>
+</tbody>
+</table><h4>Floating point datatypes</h4><p>The most commonly used datatype in PyTorch is:<br><ul class="nested-list"><li><strong><code>torch.float32</code></strong> (also written as <code>torch.float</code>)</li></ul>This is a 32-bit floating point number and is the default datatype for most tensors. It provides a good balance between numerical precision and computational efficiency, which is why it is widely used for training neural networks.<br><br>PyTorch also supports other floating point precisions:<br><ul class="nested-list"><li><strong><code>torch.float16</code></strong> (or <code>torch.half</code>)</li></ul>A 16-bit floating point format that uses less memory and can be significantly faster on supported GPUs. It is often used in <em>mixed-precision training</em>, where some computations are performed in lower precision to improve speed while maintaining overall model performance.<br><ul class="nested-list"><li><strong><code>torch.float64</code></strong> (or <code>torch.double</code>)</li></ul>A 64-bit floating point format that offers higher numerical precision but requires more memory and computation. This datatype is less common in deep learning, but may be useful in scientific computing or situations where numerical accuracy is critical.<br><br>The table comprises a more complete list of the different tensor data types.</p><h4>Integer datatypes</h4><p>In addition to floating point numbers, PyTorch supports several <strong>integer</strong> datatypes, including 8-bit, 16-bit, 32-bit and 64-bit integers (for example <code>torch.int8</code>, <code>torch.int16</code>, <code>torch.int32</code> and <code>torch.int64</code>).</p>
+        <div class="info-box note-box">
+            <div class="box-title">
+                <span class="box-icon"></span>
+                NOTE
+            </div>
+            <div class="box-content">
+                <p>An integer is a whole number such as <code>7</code>, whereas a floating point number includes a decimal component, such as <code>7.0</code>.</p>
+            </div>
+        </div>
+        <p>Integer tensors are often used for:<br><ul class="nested-list"><li>class labels</li><br><li>indices</li><br><li>counters</li><br><li>categorical data</li></ul>They are typically <strong>not</strong> used for gradient-based learning, since most optimisation algorithms require floating point arithmetic.</p><h4>Precision and performance trade-offs</h4><p>The reason for having multiple datatypes is tied to <strong>precision in computing</strong>, which refers to how much numerical detail is used to represent a value. Higher-precision datatypes can represent numbers more accurately, but they require more memory and computational effort.<br><br>In deep learning, models perform an enormous number of numerical operations. Using higher precision everywhere can be unnecessarily expensive, while lower precision can improve speed and reduce memory usage. This leads to a trade-off:<br><ul class="nested-list"><li><strong>Higher precision</strong></li></ul>More accurate numerical representation, but slower computation and higher memory use.<br><ul class="nested-list"><li><strong>Lower precision</strong></li></ul>Faster computation and lower memory use, but potentially reduced numerical stability or accuracy.<br><br>Modern deep learning workflows often balance these trade-offs carefully, for example by combining multiple datatypes within the same model.</p><h4>Typecasting tensor data</h4><p>You can explicitly control the datatype of a tensor using the <code>dtype</code> parameter when creating it. As we have done with base Python data types in our Python Fundamentals module, using this keyword argument when instantiating an instance of class <code>torch.tensor</code> constitutes <strong>typecasting</strong> input data explicitly into your chosen data type.<br><br>In the code cell below, we demonstrate typecasting tensor data:</p>
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-13">x_float32 = torch.tensor([1, 2, 3], dtype=torch.float32)
+x_float16 = torch.tensor([1, 2, 3], dtype=torch.float16)
+x_int64   = torch.tensor([1, 2, 3], dtype=torch.int64)
+
+print(&quot;Tensor:&quot;, x_float32, &quot;| dtype:&quot;, x_float32.dtype)
+print(&quot;Tensor:&quot;, x_float16, &quot;| dtype:&quot;, x_float16.dtype)
+print(&quot;Tensor:&quot;, x_int64,   &quot;| dtype:&quot;, x_int64.dtype)</code></pre>
+            </div>
+            <div class="output-container"><pre class="output-stream">Tensor: tensor([1., 2., 3.]) | dtype: torch.float32
+Tensor: tensor([1., 2., 3.], dtype=torch.float16) | dtype: torch.float16
+Tensor: tensor([1, 2, 3]) | dtype: torch.int64
+</pre></div>
+        </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="summary">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Summary</h3>
+                        <p>In this notebook, we established what tensors are and why they act as a common representation for different data types in AI. We moved through scalar, vector, matrix and higher-dimensional examples in PyTorch, then practised indexing, slicing, reshaping and common tensor operations. We also examined tensor datatypes, their practical trade-offs and explicit typecasting with <code>dtype</code>. Together, these ideas form the core foundation needed to read and write PyTorch model code more confidently in the lessons that follow.</p>
+                    </div>
+                </div>
+            </div>
+            
+
+        <div class="page-navigation">
+            <a href="./pytorch.html" class="nav-button prev">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+                Previous
+            </a></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>© All materials are copyright scryptIQ 2025</div>
+            <div>Static Notebook - Pre-executed Content</div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../assets/main.js"></script>
+    
+    <!-- Initialize syntax highlighting -->
+    <script>
+        // Set page ready flag immediately for PDF generation
+        window.pageReady = true;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+
+</body>
+</html>
