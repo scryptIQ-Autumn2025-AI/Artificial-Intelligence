@@ -111,7 +111,7 @@
                     Introduction <span class="module-tag">AI1</span>
                 </div>
                 <div class="module-body">
-                    <p>Welcome to <strong>Artificial Intelligence 1</strong> where we will begin our practical implementation and understanding of a neural network. Starting from the very basics, this module will break down the neural network into its constituent parts. We will also explore training, how it works and how it is implemented. And lastly, we will create our own neural network from scratch, have it tackle a problem and score its output.</p><p>In this lesson, and those going forward, we will use the popular Python framework <strong>PyTorch</strong> to explore the foundations of deep learning. <strong>PyTorch</strong> is an open-source machine learning framework for Python that provides tools for building, training and deploying neural networks. It combines efficient tensor computation with automatic differentiation, allowing models to be defined and optimised in a flexible and intuitive way. PyTorch is widely used in both research and industry due to its clear syntax, strong support for GPU acceleration and seamless integration with the Python scientific computing ecosystem.<br><br>Whilst we will be explaining throughout what each step does, this will not be a deep dive into the <strong>PyTorch</strong> ecosystem. You can learn more about how to use <em>PyTorch</em> from their own website <a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html">here</a>.</p>
+                    <p>Welcome to <strong>Artificial Intelligence 1</strong> where we will begin our practical implementation and understanding of a neural network. Starting from the very basics, this module will break down the neural network into its constituent parts. We will also explore training, how it works and how it is implemented. And lastly, we will create our own neural network from scratch, have it tackle a problem and score its output.</p><p>In this lesson, and those going forward, we will use the popular Python framework <strong>PyTorch</strong> to explore the foundations of deep learning. <strong>PyTorch</strong> is an open-source machine learning framework for Python that provides tools for building, training and deploying neural networks. It combines efficient tensor computation with automatic differentiation, allowing models to be defined and optimised in a flexible and intuitive way. PyTorch is widely used in both research and industry due to its clear syntax, strong support for GPU acceleration and seamless integration with the Python scientific computing ecosystem.<br><br>Whilst we will be explaining throughout what each step does, this will not be a deep dive into everything in the <strong>PyTorch</strong> ecosystem. For more information on <em>PyTorch</em>, head to their own website <a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html">here</a>.</p>
         <div class="info-box tip-box">
             <div class="box-title">
                 <span class="box-icon"></span>
@@ -235,6 +235,12 @@ async function main() {
                     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
                     plt.close()
                     return f'<img src="data:image/png;base64,{img_base64}" style="max-width: 100%; height: auto;" />'
+
+                # Silence the "FigureCanvasAgg is non-interactive" warning that
+                # occurs when notebook code calls plt.show().  In this environment
+                # figures are captured automatically via capture_matplotlib(), so
+                # plt.show() should simply be a no-op.
+                plt.show = lambda *args, **kwargs: None
             `);
             console.log('Matplotlib capture function set up');
         }

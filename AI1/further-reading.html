@@ -265,6 +265,12 @@ async function main() {
                     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
                     plt.close()
                     return f'<img src="data:image/png;base64,{img_base64}" style="max-width: 100%; height: auto;" />'
+
+                # Silence the "FigureCanvasAgg is non-interactive" warning that
+                # occurs when notebook code calls plt.show().  In this environment
+                # figures are captured automatically via capture_matplotlib(), so
+                # plt.show() should simply be a no-op.
+                plt.show = lambda *args, **kwargs: None
             `);
             console.log('Matplotlib capture function set up');
         }
